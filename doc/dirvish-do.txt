@@ -6,12 +6,13 @@ Table of Contents                               *dirvish-do-table-of-contents*
 1. Introduction                                      |dirvish-do-introduction|
 2. Features                                              |dirvish-do-features|
 3. Installation & Requirements        |dirvish-do-installation-&-requirements|
-  - In Lua                     |dirvish-do-installation-&-requirements-in-lua|
-  - In Vimscript         |dirvish-do-installation-&-requirements-in-vimscript|
-4. Usage                                                    |dirvish-do-usage|
+4. Configuration                                    |dirvish-do-configuration|
+  - In Lua                                   |dirvish-do-configuration-in-lua|
+  - In Vimscript                       |dirvish-do-configuration-in-vimscript|
+5. Usage                                                    |dirvish-do-usage|
   - Keymaps                                         |dirvish-do-usage-keymaps|
   - Tips                                               |dirvish-do-usage-tips|
-5. Credit                                                  |dirvish-do-credit|
+6. Credit                                                  |dirvish-do-credit|
 
 ==============================================================================
 1. Introduction                                      *dirvish-do-introduction*
@@ -51,16 +52,14 @@ Then install with your favorite package manager:
     Plug 'brianhuster/dirvish-do.nvim'
 <
 
-fatal: unable to read 8f500e4510d75078432ae766465e3acae3d2550a fatal: the
-remote end hung up unexpectedly send-pack: unexpected disconnect while reading
-sideband packet fatal: the remote end hung up unexpectedly error: failed to
-push some refs to 'https://github.com/brianhuster/dirvish-do.nvim.git' #
-Configuration
+
+==============================================================================
+4. Configuration                                    *dirvish-do-configuration*
 
 You can configure the keymaps to your liking. Here’s an example:
 
 
-IN LUA                         *dirvish-do-installation-&-requirements-in-lua*
+IN LUA                                       *dirvish-do-configuration-in-lua*
 
 >lua
     require('dirvish-do').setup(){
@@ -76,7 +75,7 @@ IN LUA                         *dirvish-do-installation-&-requirements-in-lua*
 <
 
 
-IN VIMSCRIPT             *dirvish-do-installation-&-requirements-in-vimscript*
+IN VIMSCRIPT                           *dirvish-do-configuration-in-vimscript*
 
 You can use `v:lua` to call the Lua function from Vimscript:
 
@@ -90,7 +89,7 @@ See |v:lua-call| for more information.
 
 
 ==============================================================================
-4. Usage                                                    *dirvish-do-usage*
+5. Usage                                                    *dirvish-do-usage*
 
 
 KEYMAPS                                             *dirvish-do-usage-keymaps*
@@ -131,7 +130,7 @@ TIPS                                                   *dirvish-do-usage-tips*
 
 
 ==============================================================================
-5. Credit                                                  *dirvish-do-credit*
+6. Credit                                                  *dirvish-do-credit*
 
 This is a fork of vim-dirvish-dovish
 <https://github.com/roginfarrer/vim-dirvish-dovish> by Rogin Farrer that has
