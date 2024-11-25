@@ -85,7 +85,7 @@ You can also use `y` in `visual line` mode to select many files to copy or move.
 
 # Credit
 
-This is a fork of [vim-dirvish-dovish](https://github.com/roginfarrer/vim-dirvish-dovish) by Rogin Farrer that has been rewritten in Lua. It uses |luv| and |built-in| Vim commands and functions instead of shell commands for better cross-platform support out of the box.
+This is a fork of [vim-dirvish-dovish](https://github.com/roginfarrer/vim-dirvish-dovish) by Rogin Farrer that has been rewritten in Lua. It uses `:h luv` and `:h builtin` Vim commands and functions instead of shell commands for better cross-platform support out of the box.
 
 Thanks to [Anton Kavalkou](https://github.com/antosha417/nvim-lsp-file-operations) for the inspiration and the idea to integrate with LSP
 
