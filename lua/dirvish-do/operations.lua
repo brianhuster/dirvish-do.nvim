@@ -8,11 +8,11 @@ local lsp = require('dirvish-do.lsp')
 M.sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
 
 function M.rm(path)
-	local isDir = path:sub(-1) == "/"
 	if require('dirvish-do').config.operations.remove == 'trash' then
 		vim.cmd.python3(('from send2trash import send2trash; send2trash("%s")'):format(path))
 		return
 	end
+	local isDir = path:sub(-1) == "/"
 	if isDir then
 		if fs.rm then
 			fs.rm(path, { recursive = true })
