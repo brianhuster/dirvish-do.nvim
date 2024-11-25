@@ -5,14 +5,18 @@ Table of Contents                               *dirvish-do-table-of-contents*
 
 1. Introduction                                      |dirvish-do-introduction|
 2. Features                                              |dirvish-do-features|
-3. Installation & Requirements        |dirvish-do-installation-&-requirements|
-4. Configuration                                    |dirvish-do-configuration|
+3. Requirements                                      |dirvish-do-requirements|
+4. Installation                                      |dirvish-do-installation|
+  - lazy.nvim                              |dirvish-do-installation-lazy.nvim|
+  - Vim-Plug                                |dirvish-do-installation-vim-plug|
+5. Configuration                                    |dirvish-do-configuration|
   - In Lua                                   |dirvish-do-configuration-in-lua|
   - In Vimscript                       |dirvish-do-configuration-in-vimscript|
-5. Usage                                                    |dirvish-do-usage|
+6. Usage                                                    |dirvish-do-usage|
   - Keymaps                                         |dirvish-do-usage-keymaps|
+  - Trash                                             |dirvish-do-usage-trash|
   - Tips                                               |dirvish-do-usage-tips|
-6. Credit                                                  |dirvish-do-credit|
+7. Credit                                                  |dirvish-do-credit|
 
 ==============================================================================
 1. Introduction                                      *dirvish-do-introduction*
@@ -24,45 +28,60 @@ Table of Contents                               *dirvish-do-table-of-contents*
 ==============================================================================
 2. Features                                              *dirvish-do-features*
 
-- Supports most file operations: create, delete, rename, copy, move
+- Supports most file operations: create, rename, copy, move, delete, move to trash
 - Cross-platform support thanks to luv <https://github.com/luvit/luv>
 - Easy to memorize |dirvish-do-mappings|
 - Integration with LSP for renaming files,…
 
 
 ==============================================================================
-3. Installation & Requirements        *dirvish-do-installation-&-requirements*
+3. Requirements                                      *dirvish-do-requirements*
 
-You’ll need: - Nvim 0.8 or later - dirvish.vim
-<https://github.com/justinmk/vim-dirvish>
+- Nvim 0.8 or later
+- dirvish.vim <https://github.com/justinmk/vim-dirvish>
+- Optional : if you use move-to-trash feature
+    - You need to install Python3 provider for Neovim. See |provider-python| for more information
+    - You also need to install Python library send2trash <https://pypi.org/project/Send2Trash/>
 
-Then install with your favorite package manager:
+
+==============================================================================
+4. Installation                                      *dirvish-do-installation*
+
+You can install this plugin using any plugin manager that supports GitHub
+repositories. Below are some examples:
+
+
+LAZY.NVIM                                  *dirvish-do-installation-lazy.nvim*
 
 >lua
-    -- lazy.nvim
     {
         'brianhuster/dirvish-do.nvim',
         dependencies = {'justinmk/vim-dirvish'}
     }
 <
 
+
+VIM-PLUG                                    *dirvish-do-installation-vim-plug*
+
 >vim
-    " Vim-Plug
     Plug 'justinmk/vim-dirvish'
     Plug 'brianhuster/dirvish-do.nvim'
 <
 
 
 ==============================================================================
-4. Configuration                                    *dirvish-do-configuration*
+5. Configuration                                    *dirvish-do-configuration*
 
-You can configure the keymaps to your liking. Here’s an example:
+You can configure the keymaps to your liking. Below is default configuration:
 
 
 IN LUA                                       *dirvish-do-configuration-in-lua*
 
 >lua
-    require('dirvish-do').setup(){
+    require('dirvish-do').setup({
+        operations = {
+            remove = "permanent", -- Change to "trash" if you want to move to trash instead of deleting permanently
+        },
         keymaps = {
             make_file = 'mf',
             make_dir = 'md',
@@ -89,7 +108,7 @@ See |v:lua-call| for more information.
 
 
 ==============================================================================
-5. Usage                                                    *dirvish-do-usage*
+6. Usage                                                    *dirvish-do-usage*
 
 
 KEYMAPS                                             *dirvish-do-usage-keymaps*
@@ -123,6 +142,9 @@ move. (Note: `visual line` mode is recommended so that you can yank the full
 file path)
 
 
+TRASH                                                 *dirvish-do-usage-trash*
+
+
 TIPS                                                   *dirvish-do-usage-tips*
 
 - Run |dirvish-do| to see the help file generated from this README
@@ -130,7 +152,7 @@ TIPS                                                   *dirvish-do-usage-tips*
 
 
 ==============================================================================
-6. Credit                                                  *dirvish-do-credit*
+7. Credit                                                  *dirvish-do-credit*
 
 This is a fork of vim-dirvish-dovish
 <https://github.com/roginfarrer/vim-dirvish-dovish> by Rogin Farrer that has
