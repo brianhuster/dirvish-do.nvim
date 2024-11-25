@@ -52,7 +52,7 @@ require('dirvish-do').setup(){
 You can use `v:lua` to call the Lua function from Vimscript:
 
 ```vim
-v:lua.require'dirvish-do'.setup(
+call v:lua.require'dirvish-do'.setup(
     \ " Config dictionary goes here
 \ )
 ```
