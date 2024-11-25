@@ -13,7 +13,7 @@
 - Nvim 0.8 or later
 - [dirvish.vim](https://github.com/justinmk/vim-dirvish)
 - Optional : if you use move-to-trash feature
-    - You need to install Python3 provider for Neovim. See `:h provider-python` for more information
+    - You need to install Python3 provider for Neovim. You can check if `:echo has('python3')` returns 1 to knwo whether Python3 provider is installed. See `:h provider-python` for more information
     - You also need to install Python library [send2trash](https://pypi.org/project/Send2Trash/)
 
 # Installation
