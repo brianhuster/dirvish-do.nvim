@@ -1,2 +1,2 @@
 git_push:
-	nvim -c "source scripts/git-push.vim" -c "q"
+	nvim --headless -c "source scripts/git-push.vim" -c "q"
