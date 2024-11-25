@@ -95,4 +95,3 @@ This is a fork of [vim-dirvish-dovish](https://github.com/roginfarrer/vim-dirvis
 Thanks to [Anton Kavalkou](https://github.com/antosha417/nvim-lsp-file-operations) for the inspiration and the idea to integrate with LSP
 
 Big shout out to [Melandel](https://github.com/Melandel) for laying the [foundation](https://github.com/Melandel/desktop/blob/c323969e4bd48dda6dbceada3a7afe8bacdda0f5/setup/my_vimrc.vim#L976-L1147) for this plugin!
-# dirvish-do.nvim
