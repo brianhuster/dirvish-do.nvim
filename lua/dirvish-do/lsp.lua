@@ -14,7 +14,7 @@ local function send(method, params)
 		if client.supports_method(method) then
 			pcall(client.request, method, params, function(err, result)
 				if result and result.changes then
-					lsp.util.apply_workspace_edit(result)
+					lsp.util.apply_workspace_edit(result, 'utf-8')
 				end
 			end)
 		end

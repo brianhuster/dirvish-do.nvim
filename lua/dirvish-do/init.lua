@@ -1,7 +1,7 @@
 local fs = vim.fs
 local fn = vim.fn
 local uv = vim.uv or vim.loop
-local utils = require('dirvish-do.operators')
+local utils = require('dirvish-do.operations')
 local lsp = require('dirvish-do.lsp')
 local api = vim.api
 local Dirvish = vim.cmd.Dirvish
@@ -9,6 +9,9 @@ local Dirvish = vim.cmd.Dirvish
 local M = {}
 
 M.config = {
+	operations = {
+		remove = 'permanent',
+	},
 	keymaps = {
 		make_file = 'mf',
 		make_dir = 'md',

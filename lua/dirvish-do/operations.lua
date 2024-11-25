@@ -9,6 +9,10 @@ M.sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
 
 function M.rm(path)
 	local isDir = path:sub(-1) == "/"
+	if require('dirvish-do').config.operations.remove == 'trash' then
+		vim.cmd.python3(('from send2trash import send2trash; send2trash("%s")'):format(path))
+		return
+	end
 	if isDir then
 		if fs.rm then
 			fs.rm(path, { recursive = true })
@@ -62,6 +66,10 @@ function M.mv(oldPath, newPath)
 	local success, errname, errmsg = uv.fs_rename(oldPath, newPath)
 	lsp.didRenameFiles(oldPath, newPath)
 	return success, errname, errmsg
+end
+
+function M.trash(path)
+	vim.cmd.python3('from send2trash import send2trash; send2trash("' .. path .. '")')
 end
 
 return M

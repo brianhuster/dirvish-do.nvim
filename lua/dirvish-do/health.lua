@@ -16,6 +16,17 @@ function M.check()
 		health.ok('vim-dirvish is installed')
 	end
 
+	if vim.fn.has('python3') == 0 then
+		health.warn("Optional : Python3 provider not found")
+	else
+		health.ok("Optional : Python3 provider found")
+		if not pcall(vim.cmd.python3, 'import send2trash') then
+			health.warn("Optional : Python library `send2trash` not found. Move-to-trash feature won't work")
+		else
+			health.ok("Optional : Python library `send2trash` found")
+		end
+	end
+
 	health.start('Check your config')
 	health.info(vim.inspect(require('dirvish-do').config))
 end

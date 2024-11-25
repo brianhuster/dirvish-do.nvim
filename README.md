@@ -3,40 +3,48 @@
 > The file manipulation commands for [vim-dirvish](https://github.com/justinmk/vim-dirvish) that you've always wanted
 
 # Features
-- Supports most file operations: create, delete, rename, copy, move
+- Supports most file operations: create, rename, copy, move, delete, move to trash
 - Cross-platform support thanks to [luv](https://github.com/luvit/luv)
 - Easy to memorize [mappings](#mappings) 
 - Integration with LSP for renaming files,...
 
-# Installation & Requirements
+# Requirements
 
-You'll need:
 - Nvim 0.8 or later
 - [dirvish.vim](https://github.com/justinmk/vim-dirvish)
+- Optional : if you use move-to-trash feature
+    - You need to install Python3 provider for Neovim. See `:h provider-python` for more information
+    - You also need to install Python library [send2trash](https://pypi.org/project/Send2Trash/)
 
-Then install with your favorite package manager:
+# Installation
+
+You can install this plugin using any plugin manager that supports GitHub repositories. Below are some examples:
+
+## lazy.nvim 
 
 ```lua
--- lazy.nvim
 {
     'brianhuster/dirvish-do.nvim',
     dependencies = {'justinmk/vim-dirvish'}
 }
 ```
+## Vim-Plug
 
 ```vim
-" Vim-Plug
 Plug 'justinmk/vim-dirvish'
 Plug 'brianhuster/dirvish-do.nvim'
 ```
 # Configuration
 
-You can configure the keymaps to your liking. Here's an example:
+You can configure the keymaps to your liking. Below is default configuration:
 
 ## In Lua
 
 ```lua
-require('dirvish-do').setup(){
+require('dirvish-do').setup({
+    operations = {
+        remove = "permanent", -- Change to "trash" if you want to move to trash instead of deleting permanently
+    },
 	keymaps = {
 		make_file = 'mf',
 		make_dir = 'md',
@@ -47,6 +55,7 @@ require('dirvish-do').setup(){
 	},
 })
 ```
+
 ## In Vimscript
 
 You can use `v:lua` to call the Lua function from Vimscript:
@@ -77,6 +86,8 @@ Below are the default keymaps. You can change them in the [configuration](#confi
 For example, you can use `yy` to yank a file, then move to a new directory and use `p` to paste the file there. Or to move a file, you use `yy` to yank the file, move to a new directory and use `mv` to move the file there.
 
 You can also use `y` in `visual line` mode to select many files to copy or move. (Note: `visual line` mode is recommended so that you can yank the full file path)
+
+## Trash
 
 ## Tips
 
