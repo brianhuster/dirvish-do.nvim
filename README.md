@@ -53,7 +53,7 @@ You can use `v:lua` to call the Lua function from Vimscript:
 
 ```vim
 v:lua.require'dirvish-do'.setup(
-    \ Config dictionary goes here
+    \ " Config dictionary goes here
 \ )
 ```
 See `:h v:lua-call` for more information.
