@@ -1,37 +1,37 @@
-*dirvish-dovish.txt*                                          *dirvish-dovish*
+*dirvish-do.txt*                                                  *dirvish-do*
 
 ==============================================================================
-Table of Contents                           *dirvish-dovish-table-of-contents*
+Table of Contents                               *dirvish-do-table-of-contents*
 
-1. Introduction                                  |dirvish-dovish-introduction|
-2. Features                                          |dirvish-dovish-features|
-3. Installation & Requirements    |dirvish-dovish-installation-&-requirements|
-4. Configuration                                |dirvish-dovish-configuration|
-  - In Lua                               |dirvish-dovish-configuration-in-lua|
-  - In Vimscript                   |dirvish-dovish-configuration-in-vimscript|
-5. Usage                                                |dirvish-dovish-usage|
-  - Keymaps                                     |dirvish-dovish-usage-keymaps|
-  - Tips                                           |dirvish-dovish-usage-tips|
-6. Credit                                              |dirvish-dovish-credit|
+1. Introduction                                      |dirvish-do-introduction|
+2. Features                                              |dirvish-do-features|
+3. Installation & Requirements        |dirvish-do-installation-&-requirements|
+4. Configuration                                    |dirvish-do-configuration|
+  - In Lua                                   |dirvish-do-configuration-in-lua|
+  - In Vimscript                       |dirvish-do-configuration-in-vimscript|
+5. Usage                                                    |dirvish-do-usage|
+  - Keymaps                                         |dirvish-do-usage-keymaps|
+  - Tips                                               |dirvish-do-usage-tips|
+6. Credit                                                  |dirvish-do-credit|
 
 ==============================================================================
-1. Introduction                                  *dirvish-dovish-introduction*
+1. Introduction                                      *dirvish-do-introduction*
 
 
   The file manipulation commands for vim-dirvish
   <https://github.com/justinmk/vim-dirvish> that you’ve always wanted
 
 ==============================================================================
-2. Features                                          *dirvish-dovish-features*
+2. Features                                              *dirvish-do-features*
 
 - Supports most file operations: create, delete, rename, copy, move
 - Cross-platform support thanks to luv <https://github.com/luvit/luv>
-- Easy to memorize |dirvish-dovish-mappings|
+- Easy to memorize |dirvish-do-mappings|
 - Integration with LSP for renaming files,…
 
 
 ==============================================================================
-3. Installation & Requirements    *dirvish-dovish-installation-&-requirements*
+3. Installation & Requirements        *dirvish-do-installation-&-requirements*
 
 You’ll need: - Nvim 0.8 or later - dirvish.vim
 <https://github.com/justinmk/vim-dirvish>
@@ -54,12 +54,12 @@ Then install with your favorite package manager:
 
 
 ==============================================================================
-4. Configuration                                *dirvish-dovish-configuration*
+4. Configuration                                    *dirvish-do-configuration*
 
 You can configure the keymaps to your liking. Here’s an example:
 
 
-IN LUA                                   *dirvish-dovish-configuration-in-lua*
+IN LUA                                       *dirvish-do-configuration-in-lua*
 
 >lua
     require('dirvish-do').setup(){
@@ -75,7 +75,7 @@ IN LUA                                   *dirvish-dovish-configuration-in-lua*
 <
 
 
-IN VIMSCRIPT                       *dirvish-dovish-configuration-in-vimscript*
+IN VIMSCRIPT                           *dirvish-do-configuration-in-vimscript*
 
 >vim
     v:lua.require'dirvish-do'.setup(#{
@@ -95,13 +95,13 @@ Vimscript.
 
 
 ==============================================================================
-5. Usage                                                *dirvish-dovish-usage*
+5. Usage                                                    *dirvish-do-usage*
 
 
-KEYMAPS                                         *dirvish-dovish-usage-keymaps*
+KEYMAPS                                             *dirvish-do-usage-keymaps*
 
 Below are the default keymaps. You can change them in the
-|dirvish-dovish-configuration|
+|dirvish-do-configuration|
 
   --------------------------------------------------------------------------------
   Function                            Default   Mode     Tip to remember
@@ -129,14 +129,14 @@ move. (Note: `visual line` mode is recommended so that you can yank the full
 file path)
 
 
-TIPS                                               *dirvish-dovish-usage-tips*
+TIPS                                                   *dirvish-do-usage-tips*
 
 - Run |dirvish-do| to see the help file generated from this README
 - Use `:checkhealth dirvish-do` to check your keymaps and configuration
 
 
 ==============================================================================
-6. Credit                                              *dirvish-dovish-credit*
+6. Credit                                                  *dirvish-do-credit*
 
 This is a fork of vim-dirvish-dovish
 <https://github.com/roginfarrer/vim-dirvish-dovish> by Rogin Farrer that has
@@ -150,7 +150,7 @@ and the idea to integrate with LSP
 Big shout out to Melandel <https://github.com/Melandel> for laying the
 foundation
 <https://github.com/Melandel/desktop/blob/c323969e4bd48dda6dbceada3a7afe8bacdda0f5/setup/my_vimrc.vim#L976-L1147>
-for this plugin!
+for this plugin! # dirvish-do.nvim
 
 Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
 
