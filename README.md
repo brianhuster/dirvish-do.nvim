@@ -29,6 +29,11 @@ Then install with your favorite package manager:
 Plug 'justinmk/vim-dirvish'
 Plug 'brianhuster/dirvish-do.nvim'
 ```
+fatal: unable to read 8f500e4510d75078432ae766465e3acae3d2550a
+fatal: the remote end hung up unexpectedly
+send-pack: unexpected disconnect while reading sideband packet
+fatal: the remote end hung up unexpectedly
+error: failed to push some refs to 'https://github.com/brianhuster/dirvish-do.nvim.git'
 # Configuration
 
 You can configure the keymaps to your liking. Here's an example:
@@ -49,19 +54,14 @@ require('dirvish-do').setup(){
 ```
 ## In Vimscript
 
+You can use `v:lua` to call the Lua function from Vimscript:
+
 ```vim
-v:lua.require'dirvish-do'.setup(#{
-    \ keymaps: {
-    \ make_file: 'mf',
-    \ make_dir: 'md',
-    \ copy: 'cp',
-    \ move: 'mv',
-    \ move: 'r',
-    \ remove: '<Del>',
-    \ },
-\ })
+v:lua.require'dirvish-do'.setup(
+    \ Config dictionary goes here
+\ )
 ```
-See `:h v:lua-call` for more information on calling Lua functions from legacy Vimscript.
+See `:h v:lua-call` for more information.
 
 # Usage
 

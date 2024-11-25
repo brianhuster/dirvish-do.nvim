@@ -5,7 +5,7 @@ local fn = vim.fn
 local uv = vim.uv or vim.loop
 local lsp = require('dirvish-do.lsp')
 
-M.sep = fn.exists('+shellslash') and not vim.o.shellslash and '\\' or '/'
+M.sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
 
 function M.rm(path)
 	local isDir = path:sub(-1) == "/"
