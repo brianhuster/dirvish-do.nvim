@@ -87,8 +87,6 @@ For example, you can use `yy` to yank a file, then move to a new directory and u
 
 You can also use `y` in `visual line` mode to select many files to copy or move. (Note: `visual line` mode is recommended so that you can yank the full file path)
 
-## Trash
-
 ## Tips
 
 - Run `:h dirvish-do` to see the help file generated from this README
