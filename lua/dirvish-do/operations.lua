@@ -5,8 +5,10 @@ local fn = vim.fn
 local uv = vim.uv or vim.loop
 local lsp = require('dirvish-do.lsp')
 
+---@type string
 M.sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
 
+---@param path string
 function M.rm(path)
 	if require('dirvish-do').config.operations.remove == 'trash' then
 		M.trash(path)
@@ -28,6 +30,8 @@ function M.rm(path)
 	end
 end
 
+---@param file string
+---@param newpath string
 function M.copyfile(file, newpath)
 	local success, errname, errmsg = uv.fs_copyfile(file, newpath)
 	if not success then
@@ -36,6 +40,8 @@ function M.copyfile(file, newpath)
 end
 
 -- Copy dir recursively
+---@param dir string
+---@param newpath string
 function M.copydir(dir, newpath)
 	local handle = uv.fs_scandir(dir)
 	if not handle then
@@ -61,6 +67,9 @@ function M.copydir(dir, newpath)
 	end
 end
 
+---@param oldPath string
+---@param newPath string
+---@return boolean|nil, string|nil, string|nil
 function M.mv(oldPath, newPath)
 	lsp.willRenameFiles(oldPath, newPath)
 	local success, errname, errmsg = uv.fs_rename(oldPath, newPath)
@@ -68,6 +77,7 @@ function M.mv(oldPath, newPath)
 	return success, errname, errmsg
 end
 
+---@param path string
 function M.trash(path)
 	local py3cmd = string.format('from send2trash import send2trash; send2trash("%s")', path)
 	vim.cmd.python3(py3cmd)

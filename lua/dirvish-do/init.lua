@@ -24,9 +24,11 @@ M.config = {
 
 local sep = utils.sep
 
+---@param target string
 local function moveCursorTo(target)
 	fn.search('\\V' .. fn.escape(target, '\\') .. '\\$')
 end
+
 
 local function getVisualSelectedLines()
 	local line_start = api.nvim_buf_get_mark(0, "<")[1]
@@ -177,6 +179,7 @@ function M.nremove()
 	Dirvish()
 end
 
+---@param opts table
 function M.setup(opts)
 	M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 end
