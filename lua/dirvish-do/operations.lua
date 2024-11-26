@@ -69,7 +69,8 @@ function M.mv(oldPath, newPath)
 end
 
 function M.trash(path)
-	vim.cmd.python3('from send2trash import send2trash; send2trash("' .. path .. '")')
+	local py3cmd = string.format('from send2trash import send2trash; send2trash("%s")', path)
+	vim.cmd.python3(py3cmd)
 end
 
 return M
