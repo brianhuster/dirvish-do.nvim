@@ -31,7 +31,7 @@ end
 function M.copyfile(file, newpath)
 	local success, errname, errmsg = uv.fs_copyfile(file, newpath)
 	if not success then
-		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
+		vim.notify(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
 	end
 end
 
@@ -43,7 +43,7 @@ function M.copydir(dir, newpath)
 	end
 	local success, errname, errmsg = uv.fs_mkdir(newpath, 493)
 	if not success then
-		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
+		vim.notify(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
 		return
 	end
 
