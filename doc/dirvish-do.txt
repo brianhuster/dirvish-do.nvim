@@ -14,7 +14,6 @@ Table of Contents                               *dirvish-do-table-of-contents*
   - In Vimscript                       |dirvish-do-configuration-in-vimscript|
 6. Usage                                                    |dirvish-do-usage|
   - Keymaps                                         |dirvish-do-usage-keymaps|
-  - Trash                                             |dirvish-do-usage-trash|
   - Tips                                               |dirvish-do-usage-tips|
 7. Credit                                                  |dirvish-do-credit|
 
@@ -140,9 +139,6 @@ file, move to a new directory and use `mv` to move the file there.
 You can also use `y` in `visual line` mode to select many files to copy or
 move. (Note: `visual line` mode is recommended so that you can yank the full
 file path)
-
-
-TRASH                                                 *dirvish-do-usage-trash*
 
 
 TIPS                                                   *dirvish-do-usage-tips*
