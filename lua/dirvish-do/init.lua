@@ -155,7 +155,7 @@ M.vremove = function()
 	if #lines == 0 then
 		return
 	end
-	local check = fn.confirm("Delete " .. vim.inspect(lines), "&Yes\n&No", 2)
+	local check = fn.confirm("Delete \n" .. table.concat(lines, '\n'), "&Yes\n&No", 2)
 	if check ~= 1 then
 		print("Cancelled")
 		return
