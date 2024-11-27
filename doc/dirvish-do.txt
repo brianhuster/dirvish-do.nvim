@@ -8,14 +8,14 @@ Table of Contents                               *dirvish-do-table-of-contents*
 3. Requirements                                      |dirvish-do-requirements|
 4. Installation                                      |dirvish-do-installation|
   - lazy.nvim                              |dirvish-do-installation-lazy.nvim|
+  - mini.deps                              |dirvish-do-installation-mini.deps|
   - Vim-Plug                                |dirvish-do-installation-vim-plug|
-5. Configuration                                    |dirvish-do-configuration|
-  - In Lua                                   |dirvish-do-configuration-in-lua|
-  - In Vimscript                       |dirvish-do-configuration-in-vimscript|
-6. Usage                                                    |dirvish-do-usage|
+  - In Lua                                    |dirvish-do-installation-in-lua|
+  - In Vimscript                        |dirvish-do-installation-in-vimscript|
+5. Usage                                                    |dirvish-do-usage|
   - Keymaps                                         |dirvish-do-usage-keymaps|
   - Tips                                               |dirvish-do-usage-tips|
-7. Credit                                                  |dirvish-do-credit|
+6. Credit                                                  |dirvish-do-credit|
 
 ==============================================================================
 1. Introduction                                      *dirvish-do-introduction*
@@ -49,14 +49,29 @@ Table of Contents                               *dirvish-do-table-of-contents*
 You can install this plugin using any plugin manager that supports GitHub
 repositories. Below are some examples:
 
+Note: This plugin is lazy-loaded by default, so you don’t need to worry about
+it slowing down your startup time.
+
 
 LAZY.NVIM                                  *dirvish-do-installation-lazy.nvim*
 
 >lua
     {
-        'brianhuster/dirvish-do.nvim',
-        dependencies = {'justinmk/vim-dirvish'}
+        'brianhuster/dirvish-do.nvim', 
+        --- No need to specify dependencies as lazy.nvim supports loading dependencies information from pkg.json
     }
+<
+
+
+MINI.DEPS                                  *dirvish-do-installation-mini.deps*
+
+>lua
+    MiniDeps.add({
+        source = 'brianhuster/dirvish-do.nvim',
+        depends = {
+            'justinmk/vim-dirvish',
+        },
+    })
 <
 
 
@@ -68,13 +83,11 @@ VIM-PLUG                                    *dirvish-do-installation-vim-plug*
 <
 
 
-==============================================================================
-5. Configuration                                    *dirvish-do-configuration*
-
+  Note : If you use # Configuration
 You can configure the keymaps to your liking. Below is default configuration:
 
 
-IN LUA                                       *dirvish-do-configuration-in-lua*
+IN LUA                                        *dirvish-do-installation-in-lua*
 
 >lua
     require('dirvish-do').setup({
@@ -93,7 +106,7 @@ IN LUA                                       *dirvish-do-configuration-in-lua*
 <
 
 
-IN VIMSCRIPT                           *dirvish-do-configuration-in-vimscript*
+IN VIMSCRIPT                            *dirvish-do-installation-in-vimscript*
 
 You can use `v:lua` to call the Lua function from Vimscript:
 
@@ -107,7 +120,7 @@ See |v:lua-call| for more information.
 
 
 ==============================================================================
-6. Usage                                                    *dirvish-do-usage*
+5. Usage                                                    *dirvish-do-usage*
 
 
 KEYMAPS                                             *dirvish-do-usage-keymaps*
@@ -148,7 +161,7 @@ TIPS                                                   *dirvish-do-usage-tips*
 
 
 ==============================================================================
-7. Credit                                                  *dirvish-do-credit*
+6. Credit                                                  *dirvish-do-credit*
 
 This is a fork of vim-dirvish-dovish
 <https://github.com/roginfarrer/vim-dirvish-dovish> by Rogin Farrer that has
