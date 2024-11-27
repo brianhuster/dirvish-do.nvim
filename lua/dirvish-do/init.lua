@@ -51,7 +51,7 @@ local function get_register()
 end
 
 M.mkfile = function()
-	local filename = fn.input('Enter filename: ')
+	local filename = fn.input('Enter filename: ', '', 'file')
 	filename = vim.trim(filename)
 	if #filename == 0 then
 		return
@@ -65,7 +65,7 @@ M.mkfile = function()
 end
 
 M.mkdir = function()
-	local dirname = fn.input('Directory name : ')
+	local dirname = fn.input('Directory name : ', '', 'file')
 	dirname = vim.trim(dirname)
 	if #dirname == 0 then
 		return
