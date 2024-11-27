@@ -20,20 +20,35 @@
 
 You can install this plugin using any plugin manager that supports GitHub repositories. Below are some examples:
 
+Note: This plugin is lazy-loaded by default, so you don't need to worry about it slowing down your startup time.
+
 ## lazy.nvim 
 
 ```lua
 {
-    'brianhuster/dirvish-do.nvim',
-    dependencies = {'justinmk/vim-dirvish'}
+    'brianhuster/dirvish-do.nvim', 
+    --- No need to specify dependencies as lazy.nvim supports loading dependencies information from pkg.json
 }
 ```
+
+## mini.deps
+```lua
+MiniDeps.add({
+    source = 'brianhuster/dirvish-do.nvim',
+    depends = {
+        'justinmk/vim-dirvish',
+    },
+})
+```
+
 ## Vim-Plug
 
 ```vim
 Plug 'justinmk/vim-dirvish'
 Plug 'brianhuster/dirvish-do.nvim'
 ```
+
+> Note : If you use 
 # Configuration
 
 You can configure the keymaps to your liking. Below is default configuration:
