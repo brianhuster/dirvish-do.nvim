@@ -29,31 +29,17 @@ end
 ---@param old_path string
 ---@param new_path string
 local function send_rename(method, old_path, new_path)
-	local send_rename_request = function(old, new)
-		local old_uri = vim.uri_from_fname(old_path)
-		local new_uri = vim.uri_from_fname(new_path)
-		local params = {
-			files = {
-				{
-					oldUri = old_uri,
-					newUri = new_uri,
-				},
+	local old_uri = vim.uri_from_fname(old_path)
+	local new_uri = vim.uri_from_fname(new_path)
+	local params = {
+		files = {
+			{
+				oldUri = old_uri,
+				newUri = new_uri,
 			},
-		}
-		send(method, params)
-	end
-	if old_path:sub(-1) == sep then
-		local old_path_list = fn.globpath(old_path, '*', true, true)
-		local new_path_list = fn.globpath(new_path, '*', true, true)
-		for i, old in ipairs(old_path_list) do
-			if fn.isdirectory(old) == 0 then
-				local new = new_path_list[i]
-				send_rename_request(old, new)
-			end
-		end
-	else
-		send_rename_request(old_path, new_path)
-	end
+		},
+	}
+	send(method, params)
 end
 
 ---@param method string
