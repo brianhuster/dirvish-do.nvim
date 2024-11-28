@@ -14,18 +14,22 @@ function M.rm(path)
 		M.trash(path)
 		return
 	end
-	local isDir = path:sub(-1) == "/"
-	if isDir then
-		if fs.rm then
+	local isDir = path:sub(-1) == M.sep
+	if fs.rm then
+		if isDir then
 			fs.rm(path, { recursive = true })
 		else
-			fn.delete(path, 'rf')
+			fs.rm(path)
 		end
 	else
-		if fs.rm then
-			fs.rm(path)
+		local fail
+		if isDir then
+			fail = fn.delete(path, 'rf')
 		else
-			fn.delete(path)
+			fail = fn.delete(path)
+		end
+		if fail ~= 0 then
+			vim.notify(string.format("Failed to delete %s", path), vim.log.levels.ERROR)
 		end
 	end
 end
