@@ -3,7 +3,8 @@ require('dirvish-do.compat')
 local M = {}
 
 local lsp = vim.lsp
-local sep = vim.fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
+local fn = vim.fn
+local sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
 
 ---@param method string
 ---@param params table
@@ -42,11 +43,13 @@ local function send_rename(method, old_path, new_path)
 		send(method, params)
 	end
 	if old_path:sub(-1) == sep then
-		local old_path_list = vim.fn.globpath(old_path, '*', true, true)
-		local new_path_list = vim.fn.globpath(new_path, '*', true, true)
+		local old_path_list = fn.globpath(old_path, '*', true, true)
+		local new_path_list = fn.globpath(new_path, '*', true, true)
 		for i, old in ipairs(old_path_list) do
-			local new = new_path_list[i]
-			send_rename_request(old, new)
+			if fn.isdirectory(old) == 0 then
+				local new = new_path_list[i]
+				send_rename_request(old, new)
+			end
 		end
 	else
 		send_rename_request(old_path, new_path)
