@@ -48,7 +48,6 @@ Plug 'justinmk/vim-dirvish'
 Plug 'brianhuster/dirvish-do.nvim'
 ```
 
-> Note : If you use 
 # Configuration
 
 You can configure the keymaps to your liking. Below is default configuration:

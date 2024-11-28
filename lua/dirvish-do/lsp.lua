@@ -85,4 +85,6 @@ function M.didDeleteFiles(path)
 	send_file("workspace/didDeleteFiles", path)
 end
 
+M.willRenameFiles('lua/dirvish-do/lsp.lua', 'lua/dirvish-do/lsp-itg.lua')
+
 return M
