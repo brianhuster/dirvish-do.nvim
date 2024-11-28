@@ -71,19 +71,9 @@ function M.willRenameFiles(old_path, new_path)
 	send_rename("workspace/willRenameFiles", old_path, new_path)
 end
 
----@param old_path string
----@param new_path string
 function M.didRenameFiles(old_path, new_path)
 	send_rename("workspace/didRenameFiles", old_path, new_path)
-endlocal result, err =
-        ---@diagnostic disable-next-line: invisible
-        client.request_sync(ms.workspace_willRenameFiles, params, options.timeout_ms or 1000, 0)
-      if result and result.result then
-        if options.apply_edits ~= false then
-          vim.lsp.util.apply_workspace_edit(result.result, client.offset_encoding)
-        end
-        table.insert(edits, { edit = result.result, offset_encoding = client.offset_encoding })
-      else
+end
 
 ---@param path string
 function M.willCreateFiles(path)
