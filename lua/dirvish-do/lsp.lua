@@ -3,6 +3,7 @@ require('dirvish-do.compat')
 local M = {}
 
 local lsp = vim.lsp
+local sep = require('dirvish-do.utils').sep
 
 ---@param method string
 ---@param params table
@@ -27,18 +28,29 @@ end
 ---@param old_path string
 ---@param new_path string
 local function send_rename(method, old_path, new_path)
-	local old_uri = vim.uri_from_fname(old_path)
-	local new_uri = vim.uri_from_fname(new_path)
-
-	local params = {
-		files = {
-			{
-				oldUri = old_uri,
-				newUri = new_uri,
+	local send_rename_request = function(old, new)
+		local old_uri = vim.uri_from_fname(old_path)
+		local new_uri = vim.uri_from_fname(new_path)
+		local params = {
+			files = {
+				{
+					oldUri = old_uri,
+					newUri = new_uri,
+				},
 			},
-		},
-	}
-	send(method, params)
+		}
+		send(method, params)
+	end
+	if old_path:sub(-1) == sep then
+		local old_path_list = vim.fn.globpath(old_path, '*', true, true)
+		local new_path_list = vim.fn.globpath(new_path, '*', true, true)
+		for i, old in ipairs(old_path_list) do
+			local new = new_path_list[i]
+			send_rename_request(old, new)
+		end
+	else
+		send_rename_request(old_path, new_path)
+	end
 end
 
 ---@param method string
@@ -63,7 +75,15 @@ end
 ---@param new_path string
 function M.didRenameFiles(old_path, new_path)
 	send_rename("workspace/didRenameFiles", old_path, new_path)
-end
+endlocal result, err =
+        ---@diagnostic disable-next-line: invisible
+        client.request_sync(ms.workspace_willRenameFiles, params, options.timeout_ms or 1000, 0)
+      if result and result.result then
+        if options.apply_edits ~= false then
+          vim.lsp.util.apply_workspace_edit(result.result, client.offset_encoding)
+        end
+        table.insert(edits, { edit = result.result, offset_encoding = client.offset_encoding })
+      else
 
 ---@param path string
 function M.willCreateFiles(path)
