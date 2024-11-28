@@ -65,9 +65,20 @@ function M.copydir(dir, newpath)
 		local filepath = fs.joinpath(dir, name)
 		if type == "directory" then
 			M.copydir(filepath, fs.joinpath(newpath, name))
-		else
+		elseif type == "file" then
 			M.copyfile(filepath, fs.joinpath(newpath, name))
+		elseif type == "link" then
+			M.copylink(filepath, fs.joinpath(newpath, name))
 		end
+	end
+end
+
+---@param oldpath string
+---@param newpath string
+function M.copylink(oldpath, newpath)
+	local target = uv.fs_readlink(oldpath)
+	if target then
+		uv.fs_symlink(target, newpath)
 	end
 end
 

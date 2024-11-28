@@ -116,13 +116,17 @@ M.copy = function()
 	local new_dir = fn.expand("%")
 	local newpath
 	for _, target in ipairs(targets) do
-		local isDir = target:sub(-1) == sep
-		if isDir then
+		local stat = uv.fs_lstat(target)
+		local type = stat and stat.type
+		if type == 'directory' then
 			newpath = fs.joinpath(new_dir, fs.basename(target:sub(1, -2)))
 			utils.copydir(target, newpath)
-		else
+		elseif type == 'file' then
 			newpath = fs.joinpath(new_dir, fs.basename(target))
 			utils.copyfile(target, newpath)
+		elseif type == 'link' then
+			newpath = fs.joinpath(new_dir, fs.basename(target))
+			utils.copylink(target, newpath)
 		end
 	end
 	Dirvish()
