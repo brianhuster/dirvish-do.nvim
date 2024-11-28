@@ -3,7 +3,7 @@ require('dirvish-do.compat')
 local M = {}
 
 local lsp = vim.lsp
-local sep = require('dirvish-do.utils').sep
+local sep = require('dirvish-do.operations').sep
 
 ---@param method string
 ---@param params table
