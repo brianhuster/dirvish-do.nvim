@@ -46,7 +46,7 @@ end
 
 
 local function get_register()
-	local reg = vim.fn.getreg()
+	local reg = fn.getreg()
 	return vim.split(reg, '\n', { trimempty = true })
 end
 
