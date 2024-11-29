@@ -98,14 +98,10 @@ function M.rename()
 		vim.print(
 			("%s: %s"):format(errname, errmsg),
 			vim.log.levels.ERROR)
-	else
-		Dirvish()
-		if isDir then
-			moveCursorTo(newname .. sep)
-		else
-			moveCursorTo(newname)
-		end
+		return
 	end
+	Dirvish()
+	moveCursorTo(newpath .. (isDir and sep or ''))
 end
 
 M.copy = function()
@@ -141,18 +137,14 @@ M.move = function()
 	local new_dir = fn.expand("%")
 	for _, target in ipairs(targets) do
 		local isDir = target:sub(-1) == sep
-		local newpath = fs.joinpath(new_dir, fs.basename(target))
+		local newpath = fs.joinpath(new_dir, fs.basename(isDir and target:sub(1, -2) or target))
 		local success, errname, errmsg = utils.mv(target, newpath)
 		if not success then
 			vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
-		else
-			Dirvish()
-			if isDir then
-				moveCursorTo(fs.basename(newpath) .. sep)
-			else
-				moveCursorTo(fs.basename(newpath))
-			end
+			return
 		end
+		Dirvish()
+		moveCursorTo(newpath .. (isDir and sep or ''))
 	end
 end
 
