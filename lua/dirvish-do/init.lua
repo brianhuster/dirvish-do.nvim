@@ -95,7 +95,7 @@ function M.rename()
 	local newpath = fs.joinpath(fn.expand('%'), newname)
 	local success, errname, errmsg = utils.mv(target, newpath)
 	if not success then
-		vim.print(
+		vim.notify(
 			("%s: %s"):format(errname, errmsg),
 			vim.log.levels.ERROR)
 		return
