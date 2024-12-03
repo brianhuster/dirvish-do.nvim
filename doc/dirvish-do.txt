@@ -1,98 +1,24 @@
-*dirvish-do.txt*                                                  *dirvish-do*
+*dirvish-do.txt*             *dirvish-do.nvim*                 *dirvish-do*
+
+                                      Type |gO| to see the table of contents.
 
 ==============================================================================
-Table of Contents                               *dirvish-do-table-of-contents*
+1. Introduction                                      
+												*dirvish-do-introduction*
 
-1. Introduction                                      |dirvish-do-introduction|
-2. Features                                              |dirvish-do-features|
-3. Requirements                                      |dirvish-do-requirements|
-4. Installation                                      |dirvish-do-installation|
-  - lazy.nvim                              |dirvish-do-installation-lazy.nvim|
-  - mini.deps                              |dirvish-do-installation-mini.deps|
-  - Vim-Plug                                |dirvish-do-installation-vim-plug|
-5. Configuration                                    |dirvish-do-configuration|
-  - In Lua                                   |dirvish-do-configuration-in-lua|
-  - In Vimscript                       |dirvish-do-configuration-in-vimscript|
-6. Usage                                                    |dirvish-do-usage|
-  - Keymaps                                         |dirvish-do-usage-keymaps|
-  - Tips                                               |dirvish-do-usage-tips|
-7. Credit                                                  |dirvish-do-credit|
+This is an extension for |dirvish| that provides a set of keymaps to perform
+file manipulation operations. It also provides |:Open| and |:Launch| commands
+so that you can use them even if you disable |netrw|.
 
 ==============================================================================
-1. Introduction                                      *dirvish-do-introduction*
+2. Configuration                                    
+													*dirvish-do-config*
 
-
-  The file manipulation commands for vim-dirvish
-  <https://github.com/justinmk/vim-dirvish> that you’ve always wanted
-
-==============================================================================
-2. Features                                              *dirvish-do-features*
-
-- Supports most file operations: create, rename, copy, move, delete, move to trash
-- Cross-platform support thanks to luv <https://github.com/luvit/luv>
-- Easy to memorize |dirvish-do-mappings|
-- Integration with LSP for renaming files,…
-
-
-==============================================================================
-3. Requirements                                      *dirvish-do-requirements*
-
-- Nvim 0.8 or later
-- dirvish.vim <https://github.com/justinmk/vim-dirvish>
-- Optional : In case you want to move files to trash instead of deleting permanently (opts.operations.remove = "trash"):
-    - Python3 provider for Neovim. `:echo has('python3')` should return 1. See |provider-python| for more information on how to set it up.
-    - send2trash <https://pypi.org/project/Send2Trash/>
-
-
-==============================================================================
-4. Installation                                      *dirvish-do-installation*
-
-You can install this plugin using any plugin manager that supports GitHub
-repositories. Below are some examples:
-
-Note: This plugin is lazy-loaded by default, so you don’t need to worry about
-it slowing down your startup time.
-
-
-LAZY.NVIM                                  *dirvish-do-installation-lazy.nvim*
-
->lua
-    {
-        'brianhuster/dirvish-do.nvim', 
-        --- No need to specify dependencies as lazy.nvim supports loading dependencies information from pkg.json
-    }
+You can check your current configuration by running: >vim
+	:checkhealth dirvish-do
 <
 
-
-MINI.DEPS                                  *dirvish-do-installation-mini.deps*
-
->lua
-    MiniDeps.add({
-        source = 'brianhuster/dirvish-do.nvim',
-        depends = {
-            'justinmk/vim-dirvish',
-        },
-    })
-<
-
-
-VIM-PLUG                                    *dirvish-do-installation-vim-plug*
-
->vim
-    Plug 'justinmk/vim-dirvish'
-    Plug 'brianhuster/dirvish-do.nvim'
-<
-
-
-==============================================================================
-5. Configuration                                    *dirvish-do-configuration*
-
-You can configure the keymaps to your liking. Below is default configuration:
-
-
-IN LUA                                       *dirvish-do-configuration-in-lua*
-
->lua
+IN LUA >lua
     require('dirvish-do').setup({
         operations = {
             remove = "permanent", -- Change to "trash" if you want to move to trash instead of deleting permanently
@@ -105,31 +31,27 @@ IN LUA                                       *dirvish-do-configuration-in-lua*
             rename = 'r',
             remove = '<Del>',
         },
+		open_cmd = nil -- Must be a table or nil. See |:Open|
     })
 <
 
+IN VIMSCRIPT
 
-IN VIMSCRIPT                           *dirvish-do-configuration-in-vimscript*
-
-You can use `v:lua` to call the Lua function from Vimscript:
-
->vim
+You can use |v:lua| to call the Lua function from Vimscript: >vim
     call v:lua.require'dirvish-do'.setup(
         \ " Config dictionary goes here
     \ )
 <
 
-See |v:lua-call| for more information.
-
-
 ==============================================================================
-6. Usage                                                    *dirvish-do-usage*
+3. Usage                                                    
+															*dirvish-do-usage*
 
-
-KEYMAPS                                             *dirvish-do-usage-keymaps*
+KEYMAPS                                             		
+															*dirvish-do-keymaps*
 
 Below are the default keymaps. You can change them in the
-|dirvish-do-configuration|
+|dirvish-do-config|
 
   --------------------------------------------------------------------------------
   Function                            Default   Mode     Tip to remember
@@ -148,38 +70,35 @@ Below are the default keymaps. You can change them in the
 
   Move file to current directory      mv        Normal   mv for “move”
   --------------------------------------------------------------------------------
-For example, you can use `yy` to yank a file, then move to a new directory and
-use `p` to paste the file there. Or to move a file, you use `yy` to yank the
+For example, you can use |yy| to yank a file, then move to a new directory and
+use |p| to paste the file there. Or to move a file, you use |yy| to yank the
 file, move to a new directory and use `mv` to move the file there.
 
-You can also use `y` in `visual line` mode to select many files to copy or
+You can also use |y| in `visual line` mode to select many files to copy or
 move. (Note: `visual line` mode is recommended so that you can yank the full
 file path)
 
+OPENING FILES AND LAUNCHING APPS
 
-TIPS                                                   *dirvish-do-usage-tips*
+For |nvim| 0.10.1+, |dirvish-do.nvim| provides 2 commands |:Open| and |:Launch| commands
+that work the same as |netrw|'s respective commands (see |netrw-gx|), so that you can 
+use them even if you disable |netrw|.
 
-- Run |dirvish-do| to see the help file generated from this README
-- Use `:checkhealth dirvish-do` to check your keymaps and configuration
+																*:Open*
+To open a path (or URL) <path>, type >vim
+	:Open <path>
+<
+No escaping, neither for the shell nor for Vim's command-line, is needed.
 
+By default, the path is opened with the system's default application. If you
+wish to change it, you can set the option `open_cmd` in |dirvish-do-config|.
+Note that `open_cmd` must be a |lua-table| (for example `{ os_url }`) or |lua-nil|.
 
-==============================================================================
-7. Credit                                                  *dirvish-do-credit*
+																*:Launch*
+To launch a specific application <app> <args>, often <args> being <path> >vim
+    :Launch <app> <args>.
 
-This is a fork of vim-dirvish-dovish
-<https://github.com/roginfarrer/vim-dirvish-dovish> by Rogin Farrer that has
-been rewritten in Lua. It uses |luv| and |builtin| Vim commands and functions
-instead of shell commands for better cross-platform support out of the box.
-
-Thanks to Anton Kavalkou
-<https://github.com/antosha417/nvim-lsp-file-operations> for the inspiration
-and the idea to integrate with LSP
-
-Big shout out to Melandel <https://github.com/Melandel> for laying the
-foundation
-<https://github.com/Melandel/desktop/blob/c323969e4bd48dda6dbceada3a7afe8bacdda0f5/setup/my_vimrc.vim#L976-L1147>
-for this plugin!
-
-Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
+Since <args> can be arbitrarily complex, in particular contain many file
+paths, the escaping is left to the user.
 
 vim:tw=78:ts=8:noet:ft=help:norl:

@@ -5,8 +5,9 @@
 # Features
 - Supports most file operations: create, rename, copy, move, delete, move to trash
 - Cross-platform support thanks to [luv](https://github.com/luvit/luv)
-- Easy to memorize [mappings](#mappings) 
+- Easy to memorize [mappings](#keymaps) 
 - Integration with LSP for renaming files,...
+- Netrw-styled `:Open` and `:Launch` commands (only in Nvim 0.10.1+)
 
 # Requirements
 
@@ -48,63 +49,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'brianhuster/dirvish-do.nvim'
 ```
 
-# Configuration
-
-You can configure the keymaps to your liking. Below is default configuration:
-
-## In Lua
-
-```lua
-require('dirvish-do').setup({
-    operations = {
-        remove = "permanent", -- Change to "trash" if you want to move to trash instead of deleting permanently
-    },
-	keymaps = {
-		make_file = 'mf',
-		make_dir = 'md',
-		copy = 'cp',
-		move = 'mv',
-		rename = 'r',
-		remove = '<Del>',
-	},
-})
-```
-
-## In Vimscript
-
-You can use `v:lua` to call the Lua function from Vimscript:
-
-```vim
-call v:lua.require'dirvish-do'.setup(
-    \ " Config dictionary goes here
-\ )
-```
-See `:h v:lua-call` for more information.
-
-# Usage
-
-## Keymaps
-
-Below are the default keymaps. You can change them in the [configuration](#configuration)
-
-| Function                                | Default | Mode  |Tip to remember             |
-| --------------------------------------- | ------- | ----  |----------------------------|
-| Create file                             | `mf`    | Normal|`mf` for "make file"        |
-| Create directory                        | `md`    | Normal|`md` for "make directory"   |
-| Delete under cursor                     | `<Del>` | Normal|Just delete key             |
-| Delete items in visual selection        | `<Del>` | Visual|Just delete key             |
-| Rename under cursor                     | `r`     | Normal|`r` for "rename"            |
-| Copy file to current directory          | `cp`    | Normal|`cp` for "copy"             |
-| Move file to current directory          | `mv`    | Normal|`mv` for "move"             |
-
-For example, you can use `yy` to yank a file, then move to a new directory and use `p` to paste the file there. Or to move a file, you use `yy` to yank the file, move to a new directory and use `mv` to move the file there.
-
-You can also use `y` in `visual line` mode to select many files to copy or move. (Note: `visual line` mode is recommended so that you can yank the full file path)
-
-## Tips
-
-- Run `:h dirvish-do` to see the help file generated from this README
-- Use `:checkhealth dirvish-do` to check your keymaps and configuration
+See [`:h dirvish-do`](doc/dirvish-do.txt) for more information on how to configure and use the plugin.
 
 # Credit
 
