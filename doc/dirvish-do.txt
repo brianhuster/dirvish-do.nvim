@@ -17,7 +17,8 @@ You can check your current configuration by running: >vim
 	:checkhealth dirvish-do
 <
 
-IN LUA >lua
+IN LUA 
+>lua
     require('dirvish-do').setup({
         operations = {
             remove = "permanent", -- Change to "trash" if you want to move to trash instead of deleting permanently
