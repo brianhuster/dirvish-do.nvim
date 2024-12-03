@@ -3,16 +3,15 @@
                                       Type |gO| to see the table of contents.
 
 ==============================================================================
-1. Introduction                                      
-												*dirvish-do-introduction*
+1. Introduction                                      *dirvish-do-introduction*
 
 This is an extension for |dirvish| that provides a set of keymaps to perform
 file manipulation operations. It also provides |:Open| and |:Launch| commands
 so that you can use them even if you disable |netrw|.
 
 ==============================================================================
-2. Configuration                                    
-													*dirvish-do-config*
+2. Configuration
+							*dirvish-do-config*
 
 You can check your current configuration by running: >vim
 	:checkhealth dirvish-do
@@ -45,10 +44,10 @@ You can use |v:lua| to call the Lua function from Vimscript: >vim
 
 ==============================================================================
 3. Usage                                                    
-															*dirvish-do-usage*
+							    *dirvish-do-usage*
 
 KEYMAPS                                             		
-															*dirvish-do-keymaps*
+							    *dirvish-do-keymaps*
 
 Below are the default keymaps. You can change them in the
 |dirvish-do-config|
@@ -84,7 +83,7 @@ For |nvim| 0.10.1+, |dirvish-do.nvim| provides 2 commands |:Open| and |:Launch| 
 that work the same as |netrw|'s respective commands (see |netrw-gx|), so that you can 
 use them even if you disable |netrw|.
 
-																*:Open*
+								    *:Open*
 To open a path (or URL) <path>, type >vim
 	:Open <path>
 <
@@ -94,11 +93,11 @@ By default, the path is opened with the system's default application. If you
 wish to change it, you can set the option `open_cmd` in |dirvish-do-config|.
 Note that `open_cmd` must be a |lua-table| (for example `{ os_url }`) or |lua-nil|.
 
-																*:Launch*
+								    *:Launch*
 To launch a specific application <app> <args>, often <args> being <path> >vim
     :Launch <app> <args>.
 
 Since <args> can be arbitrarily complex, in particular contain many file
 paths, the escaping is left to the user.
 
-vim:tw=78:ts=4:noet:ft=help:norl:
+vim:tw=78:ts=8:noet:ft=help:norl:
