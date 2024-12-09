@@ -8,6 +8,11 @@ local lsp = require('dirvish-do.lsp')
 ---@type string
 M.sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
 
+function M.mkdir(path)
+	local success = fn.mkdir(path, 'p')
+	return success == 1
+end
+
 ---@param path string
 function M.rm(path)
 	if require('dirvish-do').config.operations.remove == 'trash' then

@@ -1,7 +1,7 @@
 local fs = vim.fs
 local fn = vim.fn
 local uv = vim.uv or vim.loop
-local utils = require('dirvish-do.operations')
+local operations = require('dirvish-do.operations')
 local lsp = require('dirvish-do.lsp')
 local api = vim.api
 local Dirvish = vim.cmd.Dirvish
@@ -22,7 +22,7 @@ M.config = {
 	},
 }
 
-local sep = utils.sep
+local sep = operations.sep
 
 ---@param target string
 local function moveCursorTo(target)
@@ -57,11 +57,17 @@ M.mkfile = function()
 		return
 	end
 	lsp.willCreateFiles(filename)
-	vim.cmd.edit("%" .. filename)
-	vim.cmd.write()
-	Dirvish()
-	moveCursorTo(fs.joinpath(fn.expand("%"), filename))
-	lsp.didCreateFiles(filename)
+	local dirname = fs.dirname(filename)
+	if fn.isdirectory(dirname) == 0 then
+		operations.mkdir(dirname)
+	end
+	if fn.isdirectory(dirname) == 1 then
+		vim.cmd.edit("%" .. filename)
+		vim.cmd.write()
+		Dirvish()
+		moveCursorTo(fs.joinpath(fn.expand("%"), filename))
+		lsp.didCreateFiles(filename)
+	end
 end
 
 M.mkdir = function()
@@ -72,10 +78,10 @@ M.mkdir = function()
 	end
 	lsp.willCreateFiles(dirname)
 	local dirpath = fs.joinpath(fn.expand("%"), dirname)
-	local success, errname, errmsg = uv.fs_mkdir(dirpath, 493)
+	local success = operations.mkdir(dirpath)
 	if not success then
-		vim.print(
-			("%s: %s"):format(errname, errmsg),
+		vim.notify(
+			("Failed to create %s"):format(dirpath),
 			vim.log.levels.ERROR)
 	else
 		Dirvish()
@@ -93,7 +99,7 @@ function M.rename()
 		return
 	end
 	local newpath = fs.joinpath(fn.expand('%'), newname)
-	local success, errname, errmsg = utils.mv(target, newpath)
+	local success, errname, errmsg = operations.mv(target, newpath)
 	if not success then
 		vim.notify(
 			("%s: %s"):format(errname, errmsg),
@@ -116,13 +122,13 @@ M.copy = function()
 		local type = stat and stat.type
 		if type == 'directory' then
 			newpath = fs.joinpath(new_dir, fs.basename(target:sub(1, -2)))
-			utils.copydir(target, newpath)
+			operations.copydir(target, newpath)
 		elseif type == 'file' then
 			newpath = fs.joinpath(new_dir, fs.basename(target))
-			utils.copyfile(target, newpath)
+			operations.copyfile(target, newpath)
 		elseif type == 'link' then
 			newpath = fs.joinpath(new_dir, fs.basename(target))
-			utils.copylink(target, newpath)
+			operations.copylink(target, newpath)
 		end
 	end
 	Dirvish()
@@ -138,7 +144,7 @@ M.move = function()
 	for _, target in ipairs(targets) do
 		local isDir = target:sub(-1) == sep
 		local newpath = fs.joinpath(new_dir, fs.basename(isDir and target:sub(1, -2) or target))
-		local success, errname, errmsg = utils.mv(target, newpath)
+		local success, errname, errmsg = operations.mv(target, newpath)
 		if not success then
 			vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
 			return
@@ -159,7 +165,7 @@ M.vremove = function()
 		return
 	end
 	for _, line in ipairs(lines) do
-		utils.rm(line)
+		operations.rm(line)
 	end
 	Dirvish()
 end
@@ -171,7 +177,7 @@ function M.nremove()
 		print("Cancelled")
 		return
 	end
-	utils.rm(line)
+	operations.rm(line)
 	Dirvish()
 end
 
