@@ -37,25 +37,17 @@ function M.rm(path)
 		M.trash(path)
 		return
 	end
+	local isDir = path:sub(-1) == M.sep
 	if vim.g.dirvish_sudo then
-		local cmd = fs.isdirectory(path) and 'rm -rf ' or 'rm '
+		local cmd = isDir and 'rm -rf ' or 'rm '
 		M.sudo_exec(cmd .. path)
 		return
 	end
-	local isDir = path:sub(-1) == M.sep
+
 	if fs.rm then
-		if isDir then
-			fs.rm(path, { recursive = true })
-		else
-			fs.rm(path)
-		end
+		fs.rm(path, isDir and { recursive = true })
 	else
-		local fail
-		if isDir then
-			fail = fn.delete(path, 'rf')
-		else
-			fail = fn.delete(path)
-		end
+		local fail = fn.delete(path, isDir and 'rf' or nil)
 		if fail ~= 0 then
 			vim.notify(string.format("Failed to delete %s", path), vim.log.levels.ERROR)
 		end
