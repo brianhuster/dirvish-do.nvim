@@ -4,7 +4,7 @@ local fs = vim.fs
 local fn = vim.fn
 local uv = vim.uv or vim.loop
 local lsp = require('dirvish-do.lsp')
-local sudo_exec = fn['dirvish#sudo#exec']
+local sudo_exec = fn['dirvish_do#sudo#exec']
 
 ---@type string
 M.sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'

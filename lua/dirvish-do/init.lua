@@ -63,7 +63,11 @@ M.mkfile = function()
 	end
 	if fn.isdirectory(dirname) == 1 then
 		vim.cmd.edit("%" .. filename)
-		vim.cmd.write()
+		if vim.g.dirvish_sudo then
+			fn['dirvish#sudo#exec']('touch ' .. filename)
+		else
+			vim.cmd.write()
+		end
 		Dirvish()
 		moveCursorTo(fs.joinpath(fn.expand("%"), filename))
 		lsp.didCreateFiles(filename)
