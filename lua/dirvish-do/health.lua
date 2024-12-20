@@ -10,10 +10,16 @@ function M.check()
 	health.ok('Your Neovim version is supported')
 
 	if not pcall(vim.fn["dirvish#remove_icon_fn"], -1) then
-		health.warn('vim-dirvish not installed',
+		health.error('vim-dirvish not installed',
 			'Get it at `https://github.com/justinmk/vim-dirvish`')
 	else
 		health.ok('vim-dirvish is installed')
+	end
+
+	if vim.fn.executable('sh') == 0 then
+		health.error('Required : `sh` not found')
+	else
+		health.ok('Required : `sh` found')
 	end
 
 	if vim.fn.has('python3') == 0 then
