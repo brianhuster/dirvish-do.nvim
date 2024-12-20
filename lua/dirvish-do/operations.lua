@@ -14,7 +14,7 @@ function M.sudo_exec(cmd)
 		vim.notify("No password provided", vim.log.levels.ERROR)
 		return
 	end
-	cmd = 'sudo -p "" -S ' .. cmd
+	cmd = { 'sudo', '-p', '', '-S', 'sh', '-c', cmd }
 	local result = fn.system(cmd, password)
 	if vim.v.shell_error then
 		vim.notify(result, vim.log.levels.ERROR)
