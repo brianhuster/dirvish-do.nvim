@@ -12,26 +12,10 @@ func! dirvish_do#sudo#exec(cmd) abort
 	return l:result
 endfunction
 
-func! dirvish_do#sudo#mkdir(dir) abort
-	return dirvish_do#sudo#exec('mkdir -p ' . a:dir)
-endfunction
-
 func! dirvish_do#sudo#rm(path) abort
 	if isdirectory(a:path)
 		return dirvish_do#sudo#exec('rm -rf ' . a:path)
 	else
 		return dirvish_do#sudo#exec('rm ' . a:path)
 	endif
-endfunction
-
-func! dirvish_do#sudo#mv(src, dest) abort
-	return dirvish_do#sudo#exec('mv ' . a:src . ' ' . a:dest)
-endfunction
-
-func! dirvish_do#sudo#cp(src, dest) abort
-	return dirvish_do#sudo#exec('cp -r ' . a:src . ' ' . a:dest)
-endfunction
-
-func! dirvish_do#sudo#mkfile(path) abort
-	return dirvish_do#sudo#exec('touch ' . a:path)
 endfunction

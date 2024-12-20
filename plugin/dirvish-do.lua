@@ -37,3 +37,7 @@ end, {
 		end
 	end
 })
+
+command('DirvishSudo', function()
+	vim.g.dirvish_sudo = not vim.g.dirvish_sudo
+end, {})
