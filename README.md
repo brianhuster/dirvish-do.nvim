@@ -8,6 +8,7 @@
 - Easy to memorize [mappings](#keymaps) 
 - Integration with LSP for renaming files,...
 - Netrw-styled `:Open` and `:Launch` commands (only in Nvim 0.10.1+)
+- Sudo mode for operations that require elevated permissions
 
 # Requirements
 

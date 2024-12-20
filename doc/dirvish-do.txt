@@ -13,10 +13,6 @@ so that you can use them even if you disable |netrw|.
 2. Configuration
 							*dirvish-do-config*
 
-You can check your current configuration by running: >vim
-	:checkhealth dirvish-do
-<
-
 IN LUA 
 >lua
     require('dirvish-do').setup({
@@ -43,6 +39,9 @@ You can use |v:lua| to call the Lua function from Vimscript: >vim
     \ )
 <
 
+You can check your current configuration by running: >vim
+	:checkhealth dirvish-do
+<
 ==============================================================================
 3. Usage                                                    
 							    *dirvish-do-usage*
@@ -77,6 +76,18 @@ file, move to a new directory and use `mv` to move the file there.
 You can also use |y| in `visual line` mode to select many files to copy or
 move. (Note: `visual line` mode is recommended so that you can yank the full
 file path)
+
+
+SUDO MODE
+							    *dirvish-do-sudo-mode*
+This plugin also provides a `sudo` mode that allows you to perform operations
+in directories that require root permissions. To toggle `sudo` mode, use this
+command: >vim
+	:DirvishSudo
+<
+When `sudo` mode is enabled, the plugin will prompt you for your password
+whenever you perform an operation as said in the previous section.
+
 
 OPENING FILES AND LAUNCHING APPS
 
