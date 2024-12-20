@@ -5,6 +5,7 @@ local operations = require('dirvish-do.operations')
 local lsp = require('dirvish-do.lsp')
 local api = vim.api
 local Dirvish = vim.cmd.Dirvish
+local sudo_exec = fn['dirvish_do#sudo#exec']
 
 local M = {}
 
@@ -64,7 +65,7 @@ M.mkfile = function()
 	if fn.isdirectory(dirname) == 1 then
 		vim.cmd.edit("%" .. filename)
 		if vim.g.dirvish_sudo then
-			fn['dirvish#sudo#exec']('touch ' .. filename)
+			sudo_exec('touch ' .. filename)
 		else
 			vim.cmd.write()
 		end

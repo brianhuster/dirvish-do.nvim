@@ -1,6 +1,6 @@
 func! dirvish_do#sudo#exec(cmd) abort
 	let l:password = inputsecret("Password: ")
-	if !l:password || len(l:password) == 0
+	if len(l:password) == 0
 		echoerr "No password provided"
 		return
 	endif
@@ -13,9 +13,6 @@ func! dirvish_do#sudo#exec(cmd) abort
 endfunction
 
 func! dirvish_do#sudo#rm(path) abort
-	if isdirectory(a:path)
-		return dirvish_do#sudo#exec('rm -rf ' . a:path)
-	else
-		return dirvish_do#sudo#exec('rm ' . a:path)
-	endif
+	let l:cmd = isdirectory(a:path) ? 'rm -rf ' : 'rm '
+	return dirvish_do#sudo#exec(l:cmd . a:path)
 endfunction
