@@ -4,6 +4,7 @@ local fs = vim.fs
 local fn = vim.fn
 local uv = vim.uv or vim.loop
 local lsp = require('dirvish-do.lsp')
+local api = vim.api
 
 ---@type string
 M.sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
@@ -31,6 +32,17 @@ function M.sudo_exec(cmd)
 	return result
 end
 
+---@param bufnr number : Buffer number, or 0 for current buffer
+---@param filename string?
+function M.sudo_write(bufnr, filename)
+	filename = filename or api.nvim_buf_get_name(bufnr)
+	local tempname = fn.tempname()
+	fn.writefile(api.nvim_buf_get_lines(0, 0, -1, true), tempname)
+	local cmd = { 'dd', 'if=' .. tempname, 'of=' .. filename, 'bs=' .. 2 ^ 20 }
+	require('dirvish-do.operations').sudo_exec(cmd)
+end
+
+---@param path string
 function M.mkdir(path)
 	if vim.g.dirvish_sudo then
 		M.sudo_exec('mkdir ' .. path)
