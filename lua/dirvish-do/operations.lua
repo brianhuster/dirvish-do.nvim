@@ -18,7 +18,7 @@ function M.sudo_exec(cmd)
 		vim.notify("No password provided", vim.log.levels.ERROR)
 		return
 	end
-	local sudo_cmd = { 'sudo', '-p', '', '-S', 'sh', '-c' }
+	local sudo_cmd = { 'sudo', '-p', '', '-S' }
 	if type(cmd) == 'table' then
 		assert(vim.islist(cmd), 'cmd table must be a list')
 		sudo_cmd = vim.list_extend(sudo_cmd, cmd)
