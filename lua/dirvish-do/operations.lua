@@ -8,15 +8,24 @@ local lsp = require('dirvish-do.lsp')
 ---@type string
 M.sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
 
+---@param cmd string|string[]
 function M.sudo_exec(cmd)
 	local password = fn.inputsecret("Password: ")
 	if #password == 0 then
 		vim.notify("No password provided", vim.log.levels.ERROR)
 		return
 	end
-	cmd = { 'sudo', '-p', '', '-S', 'sh', '-c', cmd }
+	local sudo_cmd = { 'sudo', '-p', '', '-S', 'sh', '-c' }
+	if type(cmd) == 'table' then
+		assert(vim.islist(cmd), 'cmd table must be a list')
+		vim.list_extend(sudo_cmd, cmd)
+	elseif type(cmd) == 'string' then
+		vim.list_extend(sudo_cmd, { cmd })
+	else
+		error('cmd must be a string or a list')
+	end
 	local result = fn.system(cmd, password)
-	if vim.v.shell_error then
+	if vim.v.shell_error ~= 0 then
 		vim.notify(result, vim.log.levels.ERROR)
 	end
 	return result

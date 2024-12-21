@@ -7,6 +7,14 @@ command('DirvishSudo', function()
 	print('Sudo mode for dirvish is ' .. (vim.g.dirvish_sudo and 'enabled' or 'disabled'))
 end, {})
 
+-- command('SudoWrite', function()
+-- 	local filename = vim.api.nvim_buf_get_name(0)
+-- 	local tempname = fn.tempname()
+-- 	fn.writefile(fn.getline(1, '$'), tempname)
+-- 	local cmd = ('dd if=%s of=%s bs=%d'):format(tempname, filename, 2^20)
+-- 	require'dirvish-do.operations'.sudo_exec(cmd)
+-- end, {})
+
 if fn.has('nvim-0.10.1') == 1 then
 	command("Open", function(opts)
 		local filename = opts.args
