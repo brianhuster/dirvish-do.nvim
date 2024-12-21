@@ -82,8 +82,8 @@ SUDO MODE
 							    *dirvish-do-sudo-mode*
 This plugin also provides a `sudo` mode that allows you to perform operations
 in directories that require root permissions. To use `sudo` mode in `dirvish-do.nvim`,
-you need to ensure command `sh` is executable. To toggle `sudo` mode, use this 
-command: >vim
+you need to ensure Unix commands like `mkdir`, `cp`, `mv`,... are available. To toggle 
+`sudo` mode, use this command: >vim
 	:DirvishSudo
 <
 When `sudo` mode is enabled, the plugin will prompt you for your password

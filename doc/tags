@@ -4,6 +4,7 @@ dirvish-do	dirvish-do.txt	/*dirvish-do*
 dirvish-do-config	dirvish-do.txt	/*dirvish-do-config*
 dirvish-do-introduction	dirvish-do.txt	/*dirvish-do-introduction*
 dirvish-do-keymaps	dirvish-do.txt	/*dirvish-do-keymaps*
+dirvish-do-sudo-mode	dirvish-do.txt	/*dirvish-do-sudo-mode*
 dirvish-do-usage	dirvish-do.txt	/*dirvish-do-usage*
 dirvish-do.nvim	dirvish-do.txt	/*dirvish-do.nvim*
 dirvish-do.txt	dirvish-do.txt	/*dirvish-do.txt*
