@@ -20,7 +20,7 @@ function M.sudo_exec(cmd)
 		assert(vim.islist(cmd), 'cmd table must be a list')
 		vim.list_extend(sudo_cmd, cmd)
 	elseif type(cmd) == 'string' then
-		vim.list_extend(sudo_cmd, { cmd })
+		table.insert(sudo_cmd, cmd)
 	else
 		error('cmd must be a string or a list')
 	end
