@@ -9,6 +9,8 @@ local api = vim.api
 ---@type string
 M.sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
 
+--- Run a command with sudo. Will prompt for password.
+--- Use |v:shell_error| to check if the command was successful.
 ---@param cmd string|string[]
 function M.sudo_exec(cmd)
 	local password = fn.inputsecret("Password: ")
@@ -40,12 +42,15 @@ function M.sudo_write(bufnr, filename)
 	fn.writefile(api.nvim_buf_get_lines(0, 0, -1, true), tempname)
 	local cmd = { 'dd', 'if=' .. tempname, 'of=' .. filename, 'bs=' .. 2 ^ 20 }
 	require('dirvish-do.operations').sudo_exec(cmd)
+	if vim.v.shell_error == 0 then
+		print(filename .. ' written')
+	end
 end
 
 ---@param path string
 function M.mkdir(path)
 	if vim.g.dirvish_sudo then
-		M.sudo_exec('mkdir ' .. path)
+		M.sudo_exec({ 'mkdir', '-p', path })
 		return vim.v.shell_error == 0
 	end
 	local success = fn.mkdir(path, 'p')
@@ -60,8 +65,8 @@ function M.rm(path)
 	end
 	local isDir = path:sub(-1) == M.sep
 	if vim.g.dirvish_sudo then
-		local cmd = isDir and 'rm -rf ' or 'rm '
-		M.sudo_exec(cmd .. path)
+		local cmd = isDir and { 'rm', '-rf' } or { 'rm' }
+		M.sudo_exec(vim.list_extend(cmd, { path }))
 		return
 	end
 
@@ -79,7 +84,7 @@ end
 ---@param newpath string
 function M.copyfile(file, newpath)
 	if vim.g.dirvish_sudo then
-		M.sudo_exec('cp ' .. file .. ' ' .. newpath)
+		M.sudo_exec({ 'cp', file, newpath })
 		return vim.v.shell_error == 0
 	end
 	local success, errname, errmsg = uv.fs_copyfile(file, newpath)
@@ -98,7 +103,7 @@ function M.copydir(dir, newpath)
 		return
 	end
 	if vim.g.dirvish_sudo then
-		M.sudo_exec('cp -r ' .. dir .. ' ' .. newpath)
+		M.sudo_exec({ 'cp', '-r', dir, newpath })
 		return vim.v.shell_error == 0
 	end
 	local success, errname, errmsg = uv.fs_mkdir(newpath, 493)
@@ -129,7 +134,7 @@ function M.copylink(oldpath, newpath)
 	local target = uv.fs_readlink(oldpath)
 	if target then
 		if vim.g.dirvish_sudo then
-			M.sudo_exec('ln -s ' .. target .. ' ' .. newpath)
+			M.sudo_exec({ 'cp', oldpath, newpath })
 			return vim.v.shell_error == 0
 		end
 		uv.fs_symlink(target, newpath)
@@ -142,7 +147,7 @@ end
 function M.mv(oldPath, newPath)
 	lsp.willRenameFiles(oldPath, newPath)
 	if vim.g.dirvish_sudo then
-		M.sudo_exec('mv ' .. oldPath .. ' ' .. newPath)
+		M.sudo_exec({ 'mv', oldPath, newPath })
 		return vim.v.shell_error == 0, '', ''
 	end
 	local success, errname, errmsg = uv.fs_rename(oldPath, newPath)
