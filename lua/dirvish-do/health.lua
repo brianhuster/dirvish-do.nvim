@@ -16,11 +16,11 @@ function M.check()
 		health.ok('vim-dirvish is installed')
 	end
 
-	if vim.fn.executable('sh') == 0 then
-		health.error('Required : `sh` not found')
-	else
-		health.ok('Required : `sh` found')
-	end
+	-- if vim.fn.executable('sh') == 0 then
+	-- 	health.error('Required : `sh` not found')
+	-- else
+	-- 	health.ok('Required : `sh` found')
+	-- end
 
 	if vim.fn.has('python3') == 0 then
 		health.warn("Optional : Python3 provider not found")
