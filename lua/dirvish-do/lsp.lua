@@ -3,8 +3,6 @@ require('dirvish-do.compat')
 local M = {}
 
 local lsp = vim.lsp
-local fn = vim.fn
-local sep = fn.exists('+shellslash') == 1 and not vim.o.shellslash and '\\' or '/'
 
 ---@param method string
 ---@param params table

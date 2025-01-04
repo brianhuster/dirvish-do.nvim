@@ -77,6 +77,9 @@ You can also use |y| in `visual line` mode to select many files to copy or
 move. (Note: `visual line` mode is recommended so that you can yank the full
 file path)
 
+If you want to delete multiple files, you should use Visual mode to select the
+files. Visual line mode doesn't work for this operation.
+
 
 SUDO MODE
 							    *dirvish-do-sudo-mode*

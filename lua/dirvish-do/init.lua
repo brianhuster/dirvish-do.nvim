@@ -1,9 +1,8 @@
-local fs = vim.fs
-local fn = vim.fn
+local fs, fn = vim.fs, vim.fn
 local uv = vim.uv or vim.loop
 local operations = require('dirvish-do.operations')
 local lsp = require('dirvish-do.lsp')
-local api = vim.api
+local utils = require('dirvish-do.utils')
 local Dirvish = vim.cmd.Dirvish
 
 local M = {}
@@ -29,26 +28,6 @@ local function moveCursorTo(target)
 	fn.search('\\V' .. fn.escape(target, '\\') .. '\\$')
 end
 
-
-local function getVisualSelectedLines()
-	local line_start = api.nvim_buf_get_mark(0, "<")[1]
-	local line_end = api.nvim_buf_get_mark(0, ">")[1]
-
-	if line_start > line_end then
-		line_start, line_end = line_end, line_start
-	end
-
-	--- Nvim API indexing is zero-based, end-exclusive
-	local lines = api.nvim_buf_get_lines(0, line_start - 1, line_end, false)
-
-	return lines
-end
-
-
-local function get_register()
-	local reg = fn.getreg()
-	return vim.split(reg, '\n', { trimempty = true })
-end
 
 M.mkfile = function()
 	local filename = fn.input('Enter filename: ', '', 'file')
@@ -115,7 +94,7 @@ function M.rename()
 end
 
 M.copy = function()
-	local targets = get_register()
+	local targets = utils.get_register()
 	if #targets == 0 then
 		return
 	end
@@ -140,7 +119,7 @@ M.copy = function()
 end
 
 M.move = function()
-	local targets = get_register()
+	local targets = utils.get_register()
 	if #targets == 0 then
 		return
 	end
@@ -159,7 +138,7 @@ M.move = function()
 end
 
 M.vremove = function()
-	local lines = getVisualSelectedLines()
+	local lines = utils.getVisualSelectedLines()
 	if #lines == 0 then
 		return
 	end
