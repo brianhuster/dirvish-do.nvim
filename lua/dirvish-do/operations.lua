@@ -49,7 +49,7 @@ end
 
 ---@param path string
 function M.mkdir(path)
-	if vim.g.dirvish_sudo then
+	if vim.b.dirvish_sudo then
 		M.sudo_exec({ 'mkdir', '-p', path })
 		return vim.v.shell_error == 0
 	end
@@ -64,7 +64,7 @@ function M.rm(path)
 		return
 	end
 	local isDir = path:sub(-1) == M.sep
-	if vim.g.dirvish_sudo then
+	if vim.b.dirvish_sudo then
 		local cmd = isDir and { 'rm', '-rf' } or { 'rm' }
 		M.sudo_exec(vim.list_extend(cmd, { path }))
 		return
@@ -83,7 +83,7 @@ end
 ---@param file string
 ---@param newpath string
 function M.copyfile(file, newpath)
-	if vim.g.dirvish_sudo then
+	if vim.b.dirvish_sudo then
 		M.sudo_exec({ 'cp', file, newpath })
 		return vim.v.shell_error == 0
 	end
@@ -102,7 +102,7 @@ function M.copydir(dir, newpath)
 	if not handle then
 		return
 	end
-	if vim.g.dirvish_sudo then
+	if vim.b.dirvish_sudo then
 		M.sudo_exec({ 'cp', '-r', dir, newpath })
 		return vim.v.shell_error == 0
 	end
@@ -133,7 +133,7 @@ end
 function M.copylink(oldpath, newpath)
 	local target = uv.fs_readlink(oldpath)
 	if target then
-		if vim.g.dirvish_sudo then
+		if vim.b.dirvish_sudo then
 			M.sudo_exec({ 'cp', oldpath, newpath })
 			return vim.v.shell_error == 0
 		end
@@ -146,7 +146,7 @@ end
 ---@return boolean|nil, string|nil, string|nil
 function M.mv(oldPath, newPath)
 	lsp.willRenameFiles(oldPath, newPath)
-	if vim.g.dirvish_sudo then
+	if vim.b.dirvish_sudo then
 		M.sudo_exec({ 'mv', oldPath, newPath })
 		return vim.v.shell_error == 0, '', ''
 	end

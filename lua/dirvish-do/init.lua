@@ -42,7 +42,7 @@ M.mkfile = function()
 	end
 	if fn.isdirectory(dirname) == 1 then
 		vim.cmd.edit("%" .. filename)
-		if vim.g.dirvish_sudo then
+		if vim.b.dirvish_sudo then
 			operations.sudo_exec('touch ' .. filename)
 		else
 			vim.cmd.write()

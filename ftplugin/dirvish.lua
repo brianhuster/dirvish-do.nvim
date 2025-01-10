@@ -16,6 +16,7 @@ map({ 'n' }, keymaps.remove, dirvido.nremove)
 map({ 'x' }, keymaps.remove, dirvido.vremove)
 map({ 'n' }, keymaps.make_file, dirvido.mkfile)
 map({ 'n' }, keymaps.make_dir, dirvido.mkdir)
--- map({ 'v' }, 'y', function()
--- 	vim.fn.setreg(vim.v.register, require 'dirvish-do.utils'.getVisualSelectedLines())
--- end)
+
+if vim.fn.filewritable(vim.api.nvim_buf_get_name(0)) ~= 2 then
+	vim.b.dirvish_sudo = true
+end
