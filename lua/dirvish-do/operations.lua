@@ -59,6 +59,7 @@ end
 
 ---@param path string
 function M.rm(path)
+	lsp.willDeleteFiles(path)
 	if require('dirvish-do').config.operations.remove == 'trash' then
 		M.trash(path)
 		return
@@ -67,15 +68,19 @@ function M.rm(path)
 	if vim.b.dirvish_sudo then
 		local cmd = isDir and { 'rm', '-rf' } or { 'rm' }
 		M.sudo_exec(vim.list_extend(cmd, { path }))
+		lsp.didDeleteFiles(path)
 		return
 	end
 
 	if fs.rm then
 		fs.rm(path, isDir and { recursive = true })
+		lsp.didCreateFiles(path)
 	else
 		local fail = fn.delete(path, isDir and 'rf' or nil)
 		if fail ~= 0 then
 			vim.notify(string.format("Failed to delete %s", path), vim.log.levels.ERROR)
+		else
+			lsp.didDeleteFiles(path)
 		end
 	end
 end

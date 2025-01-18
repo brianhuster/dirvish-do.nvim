@@ -164,7 +164,7 @@ function M.nremove()
 	Dirvish()
 end
 
----@param opts table
+---@param opts {operations: {remove: string?}?, keymaps: {make_file: string?, make_dir: string?, copy: string?, move: string?, rename: string?, remove: string?}?}?
 function M.setup(opts)
 	M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 end
