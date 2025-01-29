@@ -36,7 +36,7 @@ M.mkfile = function()
 		return
 	end
 	lsp.willCreateFiles(filename)
-	local dirname = fs.dirname(filename)
+	local dirname = fs.joinpath(fn.expand('%'), fs.dirname(filename))
 	if fn.isdirectory(dirname) == 0 then
 		operations.mkdir(dirname)
 	end
