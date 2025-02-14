@@ -93,28 +93,4 @@ use this command: >vim
 When `sudo` mode is enabled, the plugin will prompt you for your password
 whenever you perform an operation as said in the previous section.
 
-
-OPENING FILES AND LAUNCHING APPS
-
-For |nvim| 0.10.1+, |dirvish-do.nvim| provides 2 commands |:Open| and |:Launch| commands
-that work the same as |netrw|'s respective commands (see |netrw-gx|), so that you can 
-use them even if you disable |netrw|.
-
-								    *:Open*
-To open a path (or URL) <path>, type >vim
-	:Open <path>
-<
-No escaping, neither for the shell nor for Vim's command-line, is needed.
-
-By default, the path is opened with the system's default application. If you
-wish to change it, you can set the option `open_cmd` in |dirvish-do-config|.
-Note that `open_cmd` must be a |lua-table| (for example `{ os_url }`) or |lua-nil|.
-
-								    *:Launch*
-To launch a specific application <app> <args>, often <args> being <path> >vim
-    :Launch <app> <args>.
-
-Since <args> can be arbitrarily complex, in particular contain many file
-paths, the escaping is left to the user.
-
 vim:tw=78:ts=8:noet:ft=help:norl:

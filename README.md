@@ -7,7 +7,6 @@
 - Cross-platform support thanks to [luv](https://github.com/luvit/luv)
 - Easy to memorize [mappings](#keymaps) 
 - Integration with LSP for renaming files,...
-- Netrw-styled `:Open` and `:Launch` commands (only in Nvim 0.10.1+)
 - Sudo mode for operations that require elevated permissions
 
 # Requirements
@@ -29,7 +28,7 @@ Note: This plugin is lazy-loaded by default, so you don't need to worry about it
 
 ```lua
 {
-    'brianhuster/dirvish-do.nvim', 
+    'brianhuster/dirvish-do.nvim',
     --- No need to specify dependencies as lazy.nvim supports loading dependencies information from pkg.json
 }
 ```
