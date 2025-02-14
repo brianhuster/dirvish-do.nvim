@@ -74,7 +74,7 @@ function M.rm(path)
 
 	if fs.rm then
 		fs.rm(path, isDir and { recursive = true })
-		lsp.didCreateFiles(path)
+		lsp.didDeleteFiles(path)
 	else
 		local fail = fn.delete(path, isDir and 'rf' or nil)
 		if fail ~= 0 then
